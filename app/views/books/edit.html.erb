@@ -1,0 +1,28 @@
+
+<div class="col-md-6 mx-auto  pt-4 ">
+
+  <h1>Editing Book</h1>
+  <% if @book.errors.any? %>
+  <%= @book.errors.count %>errors
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+
+  </ul>
+<% end %>
+
+  <%= form_with model: @book do |f| %>
+    <p>Title:</p>
+      <%= f.text_field :title %>
+    <p>Opinion:</p>
+      <%= f.text_area :body %>
+    <p><%= f.submit 'Update Book',class:"btn btn-success" %></p>
+ <% end %>
+
+<table >
+  <tr>
+    <%= link_to "Show", book_path %>
+    | <%= link_to 'Back', books_path %>
+  </tr>
+</table>

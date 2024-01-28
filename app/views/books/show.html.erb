@@ -1,2 +1,31 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div>
+  <%= flash[:notice]%>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <%= render 'users/post', user: @user %>
+        <%= render 'list', book: @books %>
+      </div>
+      <div class="col-md-8 offset-md-1">
+        <h4>Book detail</h4>
+        <table class="table book-index">
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+                <%= image_tag @book.user.get_profile_image(100,100) %><br>
+                <%= link_to @user.name, user_path(@user) %> 
+              <% end %>
+            </td>
+            <td><%= @book.title %></td>
+            <td><%= @book.body %></td>
+            <% if @book.user == current_user %>
+              <td><%= link_to "Edit", edit_book_path, class: "btn btn-success" %></td>
+              <td><%= link_to "Destroy", book_path(@book.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  
